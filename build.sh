@@ -8,7 +8,7 @@ TANGGAL=$(date +"%Y%m%d-%H")
 export LC_ALL=C && export USE_CCACHE=1
 export ARCH=arm64
 if [ ! -d "clang" ]; then
-    git clone https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379.git clang --depth=1
+    git clone https://github.com/kdrag0n/proton-clang.git clang --depth=1
 fi
 
 make O=out ARCH=arm64 nemo_defconfig
