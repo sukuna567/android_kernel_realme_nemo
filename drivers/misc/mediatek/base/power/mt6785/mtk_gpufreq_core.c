@@ -206,8 +206,8 @@ static bool g_mtcmos_on;
 static bool g_buck_on;
 static bool g_keep_opp_freq_state;
 static bool g_fixed_freq_volt_state;
-static bool g_pbm_limited_ignore_state;
-static bool g_thermal_protect_limited_ignore_state;
+static bool g_pbm_limited_ignore_state = true;
+static bool g_thermal_protect_limited_ignore_state = true;
 static unsigned int g_opp_stress_test_state;
 static unsigned int g_efuse_id;
 static unsigned int g_segment_id;
@@ -233,21 +233,21 @@ static unsigned int g_DVFS_off_by_ptpod_idx;
 static int g_opp_sb_idx_up[NUM_OF_OPP_IDX] = { 0 };
 static int g_opp_sb_idx_down[NUM_OF_OPP_IDX] = { 0 };
 #if MT_GPUFREQ_BATT_OC_PROTECT == 1
-static bool g_batt_oc_limited_ignore_state;
+static bool g_batt_oc_limited_ignore_state = true;
 static unsigned int g_batt_oc_level;
 static unsigned int g_batt_oc_limited_idx;
 static unsigned int g_batt_oc_limited_idx_lvl_0;
 static unsigned int g_batt_oc_limited_idx_lvl_1;
 #endif
 #if MT_GPUFREQ_BATT_PERCENT_PROTECT == 1
-static bool g_batt_percent_limited_ignore_state;
+static bool g_batt_percent_limited_ignore_state = true;
 static unsigned int g_batt_percent_level;
 static unsigned int g_batt_percent_limited_idx;
 static unsigned int g_batt_percent_limited_idx_lvl_0;
 static unsigned int g_batt_percent_limited_idx_lvl_1;
 #endif
 #if MT_GPUFREQ_LOW_BATT_VOLT_PROTECT == 1
-static bool g_low_batt_limited_ignore_state;
+static bool g_low_batt_limited_ignore_state = true;
 static unsigned int g_low_battery_level;
 static unsigned int g_low_batt_limited_idx;
 static unsigned int g_low_batt_limited_idx_lvl_0;
