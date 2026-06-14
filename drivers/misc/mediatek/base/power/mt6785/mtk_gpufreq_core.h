@@ -17,12 +17,12 @@
 /**************************************************
  * GPU DVFS OPP Table Setting
  **************************************************/
-#define SEG_GPU_DVFS_FREQ0		(950000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ1		(897000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ2		(892000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ3		(888000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ4		(884000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ5		(880000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ0		(1100000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ1		(1000000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ2		(975000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ3		(950000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ4		(925000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ5		(900000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ6		(875000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ7		(871000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ8		(867000)	/* KHz */
@@ -159,7 +159,7 @@
 #define CLK26M_DEFAULT_FREQ		(26000)		/* KHz */
 #define POSDIV_2_MAX_FREQ		(1900000)	/* KHz */
 #define POSDIV_2_MIN_FREQ		(750000)	/* KHz */
-#define POSDIV_4_MAX_FREQ		(950000)	/* KHz */
+#define POSDIV_4_MAX_FREQ		(1100000)	/* KHz */
 #define POSDIV_4_MIN_FREQ		(375000)	/* KHz */
 #define POSDIV_8_MAX_FREQ		(475000)	/* KHz */
 #define POSDIV_8_MIN_FREQ		(187500)	/* KHz */

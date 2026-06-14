@@ -71,7 +71,7 @@
 /**************************************************
  * Clock Setting
  **************************************************/
-#define POSDIV_4_MAX_FREQ               (950000)        /* KHz */
+#define POSDIV_4_MAX_FREQ               (1100000)       /* KHz */
 #define POSDIV_4_MIN_FREQ               (375000)        /* KHz */
 #define POSDIV_8_MAX_FREQ               (475000)        /* KHz */
 #define POSDIV_8_MIN_FREQ               (187500)        /* KHz */
@@ -333,7 +333,7 @@ unsigned int g_ptpod_opp_idx_table_segment[] = {
  * GPU OPP table definition
  **************************************************/
 struct opp_table_info g_opp_table_segment_1[] = {
-	GPUOP(950000, 80000, 80000, POSDIV_POWER_4, 1875), /* 0 sign off */
+	GPUOP(1100000, 80000, 80000, POSDIV_POWER_4, 1875), /* 0 sign off */
 	GPUOP(941000, 79375, 79375, POSDIV_POWER_4, 1875), /* 1 */
 	GPUOP(932000, 78750, 78750, POSDIV_POWER_4, 1875), /* 2 */
 	GPUOP(923000, 78125, 78125, POSDIV_POWER_4, 1875), /* 3 */
@@ -373,7 +373,7 @@ struct opp_table_info g_opp_table_segment_1[] = {
 };
 
 struct opp_table_info g_opp_table_segment_2[] = {
-	GPUOP(950000, 80000, 80000, POSDIV_POWER_4, 1875), /* 0 sign off */
+	GPUOP(1100000, 80000, 80000, POSDIV_POWER_4, 1875), /* 0 sign off */
 	GPUOP(941000, 79375, 79375, POSDIV_POWER_4, 1875), /* 1 */
 	GPUOP(932000, 78750, 78750, POSDIV_POWER_4, 1875), /* 2 */
 	GPUOP(923000, 78125, 78125, POSDIV_POWER_4, 1875), /* 3 */
@@ -413,7 +413,7 @@ struct opp_table_info g_opp_table_segment_2[] = {
 };
 
 struct opp_table_info g_opp_table_segment_3[] = {
-	GPUOP(950000, 80000, 80000, POSDIV_POWER_4, 1875), /* 0 sign off */
+	GPUOP(1100000, 80000, 80000, POSDIV_POWER_4, 1875), /* 0 sign off */
 	GPUOP(941000, 79375, 79375, POSDIV_POWER_4, 1875), /* 1 */
 	GPUOP(932000, 78750, 78750, POSDIV_POWER_4, 1875), /* 2 */
 	GPUOP(923000, 78125, 78125, POSDIV_POWER_4, 1875), /* 3 */
