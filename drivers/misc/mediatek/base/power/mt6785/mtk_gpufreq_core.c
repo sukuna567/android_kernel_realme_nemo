@@ -2636,7 +2636,7 @@ static enum g_posdiv_power_enum __mt_gpufreq_get_posdiv_power(
 	 * only use posdiv 4 or 8
 	 * sub-clksrc is MAINPLL_D5(218.4MHz), please make sure don't overclock
 	 */
-	if (freq > 950000)
+	if (freq >= POSDIV_2_MIN_FREQ)
 		posdiv_power = POSDIV_POWER_2;
 	else if (freq < POSDIV_4_MIN_FREQ)
 		posdiv_power = POSDIV_POWER_8;
