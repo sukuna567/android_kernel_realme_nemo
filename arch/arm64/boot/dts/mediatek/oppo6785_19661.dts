@@ -971,9 +971,9 @@
 	//for oppo chg framework:
 	qcom,chargerid_support;
 	qcom,usbtemp_batttemp_gap = <18>;
-	qcom,input_current_charger_ma = <2200>;
+	qcom,input_current_charger_ma = <3300>;
 	qcom,pd_input_current_charger_ma = <3300>;
-	qcom,qc_input_current_charger_ma = <2000>;
+	qcom,qc_input_current_charger_ma = <3300>;
 	qcom,input_current_usb_ma = <500>;
 	qcom,input_current_cdp_ma = <1500>;
 	qcom,input_current_led_ma = <1200>;
@@ -1023,7 +1023,7 @@
 	qcom,temp_little_cold_fastchg_current_ma = <1200>;
 	qcom,pd_temp_little_cold_fastchg_current_ma_high = <1800>;
 	qcom,pd_temp_little_cold_fastchg_current_ma_low = <1500>;
-	qcom,qc_temp_little_cold_fastchg_current_ma_high = <1800>;
+	qcom,qc_temp_little_cold_fastchg_current_ma_high = <3300>;
 	qcom,qc_temp_little_cold_fastchg_current_ma_low = <1500>;
 
 	qcom,cool_bat_decidegc = <50>;	/* 5C ~ 12C */
@@ -1032,20 +1032,20 @@
 	qcom,temp_cool_fastchg_current_ma_low = <2000>;
 	qcom,pd_temp_cool_fastchg_current_ma_high = <2000>;
 	qcom,pd_temp_cool_fastchg_current_ma_low = <1500>;
-	qcom,qc_temp_cool_fastchg_current_ma_high = <2000>;
-	qcom,qc_temp_cool_fastchg_current_ma_low = <1500>;
+	qcom,qc_temp_cool_fastchg_current_ma_high = <3300>;
+	qcom,qc_temp_cool_fastchg_current_ma_low = <3300>;
 
 	qcom,little_cool_bat_decidegc = <120>;	/* 12C ~ 16C */
 	qcom,temp_little_cool_vfloat_mv = <4435>;
 	qcom,temp_little_cool_fastchg_current_ma = <2200>;
 	qcom,pd_temp_little_cool_fastchg_current_ma = <2000>;
-	qcom,qc_temp_little_cool_fastchg_current_ma = <2000>;
+	qcom,qc_temp_little_cool_fastchg_current_ma = <3300>;
 
 	qcom,normal_bat_decidegc = <160>;	/* 16C ~ 45C */
 	qcom,temp_normal_fastchg_current_ma = <2200>;
 	qcom,temp_normal_vfloat_mv = <4435>;
 	//qcom,pd_temp_normal_fastchg_current_ma = <2000>;
-	qcom,qc_temp_normal_fastchg_current_ma = <2000>;
+	qcom,qc_temp_normal_fastchg_current_ma = <3300>;
 
 	qcom,warm_bat_decidegc = <450>;		/* 45C ~ 53C */ /*8pin Bat Vooc project need add 3 degree C*/
 
