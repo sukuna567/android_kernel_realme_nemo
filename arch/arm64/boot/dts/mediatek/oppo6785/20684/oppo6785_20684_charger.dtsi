@@ -70,35 +70,35 @@
 
 	qcom,cold_bat_decidegc = <20>;  /* -3C ~ 0C */
 	qcom,temp_cold_vfloat_mv = <3980>;
-	qcom,temp_cold_fastchg_current_ma = <300>;
+	qcom,temp_cold_fastchg_current_ma = <3300>;
 
 	qcom,little_cold_bat_decidegc = <0>;	/* 0C ~ 5C */
 	qcom,temp_little_cold_vfloat_mv = <4435>;
-	qcom,temp_little_cold_fastchg_current_ma_high = <950>;
-	qcom,temp_little_cold_fastchg_current_ma_low = <950>;
-	qcom,temp_little_cold_fastchg_current_ma = <950>;
+	qcom,temp_little_cold_fastchg_current_ma_high = <3300>;
+	qcom,temp_little_cold_fastchg_current_ma_low = <3300>;
+	qcom,temp_little_cold_fastchg_current_ma = <3300>;
 	qcom,pd_temp_little_cold_fastchg_current_ma_high = <3300>;
-	qcom,pd_temp_little_cold_fastchg_current_ma_low = <1400>;
+	qcom,pd_temp_little_cold_fastchg_current_ma_low = <3300>;
 	qcom,qc_temp_little_cold_fastchg_current_ma_high = <3300>;
-	qcom,qc_temp_little_cold_fastchg_current_ma_low = <1400>;
+	qcom,qc_temp_little_cold_fastchg_current_ma_low = <3300>;
 
 	qcom,cool_bat_decidegc = <50>;	/* 5C ~ 12C */
 	qcom,temp_cool_vfloat_mv = <4435>;
-	qcom,temp_cool_fastchg_current_ma_high = <1000>;
-	qcom,temp_cool_fastchg_current_ma_low = <1100>;
+	qcom,temp_cool_fastchg_current_ma_high = <3300>;
+	qcom,temp_cool_fastchg_current_ma_low = <3300>;
 	qcom,pd_temp_cool_fastchg_current_ma_high = <3300>;
-	qcom,pd_temp_cool_fastchg_current_ma_low = <1500>;
+	qcom,pd_temp_cool_fastchg_current_ma_low = <3300>;
 	qcom,qc_temp_cool_fastchg_current_ma_high = <3300>;
 	qcom,qc_temp_cool_fastchg_current_ma_low = <3300>;
 
 	qcom,little_cool_bat_decidegc = <120>;	/* 12C ~ 16C */
 	qcom,temp_little_cool_vfloat_mv = <4435>;
-	qcom,temp_little_cool_fastchg_current_ma = <1000>;
+	qcom,temp_little_cool_fastchg_current_ma = <3300>;
 	qcom,pd_temp_little_cool_fastchg_current_ma = <3300>;
 	qcom,qc_temp_little_cool_fastchg_current_ma = <3300>;
 
 	qcom,normal_bat_decidegc = <160>;	/* 16C ~ 45C */
-	qcom,temp_normal_fastchg_current_ma = <1000>;
+	qcom,temp_normal_fastchg_current_ma = <3300>;
 	qcom,temp_normal_vfloat_mv = <4435>;
 	qcom,pd_temp_normal_fastchg_current_ma = <3300>;
 	qcom,qc_temp_normal_fastchg_current_ma = <3300>;
@@ -106,10 +106,10 @@
 	qcom,warm_bat_decidegc = <440>;		/* 45C ~ 53C */ /*8pin Bat Vooc project need add 3 degree C*/
 
 	qcom,temp_warm_vfloat_mv = <4120>;
-	qcom,temp_warm_fastchg_current_ma = <550>;
-	qcom,pd_temp_warm_fastchg_current_ma = <600>;
-	qcom,qc_temp_warm_fastchg_current_ma = <600>;
-	qcom,temp_warm_fastchg_current_ma_led_on = <250>;
+	qcom,temp_warm_fastchg_current_ma = <3300>;
+	qcom,pd_temp_warm_fastchg_current_ma = <3300>;
+	qcom,qc_temp_warm_fastchg_current_ma = <3300>;
+	qcom,temp_warm_fastchg_current_ma_led_on = <3300>;
 
 	qcom,hot_bat_decidegc = <530>;  /* > 53C */
 
@@ -186,11 +186,11 @@
 	qcom,ffc2_warm_vfloat_over_sw_limit = <4500>;
 
 	qcom,default_iterm_ma = <115>;
-	qcom,default_temp_normal_fastchg_current_ma = <2200>;
+	qcom,default_temp_normal_fastchg_current_ma = <3300>;
 	qcom,default_normal_vfloat_sw_limit = <4385>;
 	qcom,default_temp_normal_vfloat_mv = <4435>;
 	qcom,default_normal_vfloat_over_sw_limit = <4440>;
-	qcom,default_temp_little_cool_fastchg_current_ma = <1100>;
+	qcom,default_temp_little_cool_fastchg_current_ma = <3300>;
 	qcom,default_little_cool_vfloat_sw_limit = <4385>;
 	qcom,default_temp_little_cool_vfloat_mv = <4435>;
 	qcom,default_little_cool_vfloat_over_sw_limit = <4445>;
