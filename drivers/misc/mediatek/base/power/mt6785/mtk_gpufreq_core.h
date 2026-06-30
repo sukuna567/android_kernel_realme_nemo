@@ -17,9 +17,9 @@
 /**************************************************
  * GPU DVFS OPP Table Setting
  **************************************************/
-#define SEG_GPU_DVFS_FREQ0		(1100000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ1		(1000000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ2		(975000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ0		(950000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ1		(950000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ2		(950000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ3		(950000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ4		(925000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ5		(900000)	/* KHz */
