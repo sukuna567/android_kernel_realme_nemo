@@ -118,7 +118,7 @@ CONFIG_NO_HZ=y
 CONFIG_HIGH_RES_TIMERS=y
 
 #
-CONFIG_KALLSYMS_ALL=Y
+CONFIG_KALLSYMS_ALL=y
 #
 # CPU/Task time and stats accounting
 #
@@ -858,7 +858,7 @@ CONFIG_DEFAULT_BBR=y
 # CONFIG_DEFAULT_WESTWOOD is not set
 # CONFIG_DEFAULT_DCTCP is not set
 # CONFIG_DEFAULT_CDG is not set
-# CONFIG_DEFAULT_BBR is not set
+# Default TCP congestion control
 # CONFIG_DEFAULT_RENO is not set
 CONFIG_DEFAULT_TCP_CONG="bbr"
 # CONFIG_TCP_MD5SIG is not set
