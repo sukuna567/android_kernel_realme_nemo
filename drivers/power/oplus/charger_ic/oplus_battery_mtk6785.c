@@ -92,7 +92,11 @@ extern void oplus_usbtemp_recover_func(struct oplus_chg_chip *chip);
 
 extern bool is_mtksvooc_project;
 extern bool is_mtkvooc30_project;
-extern int battery_meter_get_charger_voltage(void);
+extern int battery_get_vbus(void);
+int battery_meter_get_charger_voltage(void)
+{
+	return battery_get_vbus();
+}
 static int oplus_mt6360_reset_charger(void);
 static int oplus_mt6360_enable_charging(void);
 static int oplus_mt6360_disable_charging(void);
