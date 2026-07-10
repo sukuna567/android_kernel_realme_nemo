@@ -231,16 +231,6 @@ struct thermal_zone_device_ops chargeridntc_thermal_zone_ops = {
 };
 #endif
 
-/* LiYue@BSP.CHG.Basic, 2020/02/12, remove to mtk_pe40_intf.c, resolve compile error */
-bool mtk_is_TA_support_pd_pps(struct charger_manager *pinfo)
-{
-	if (pinfo->enable_pe_4 == false && pinfo->enable_pe_5 == false)
-		return false;
-
-	if (pinfo->pd_type == MTK_PD_CONNECT_PE_READY_SNK_APDO)
-		return true;
-	return false;
-}
 
 
 bool is_power_path_supported(void)
