@@ -1857,8 +1857,7 @@ bool __attribute__((weak)) oplus_usbtemp_condition(void)
 	return false;
 }
 
-static void mt_usb_connect(void) { return; }
-static void mt_usb_disconnect(void) { return; }
+
 
 struct oplus_chg_operations  mp2650_chg_ops = {
     .dump_registers = mp2650_dump_registers,
