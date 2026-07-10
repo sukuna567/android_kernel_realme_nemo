@@ -585,6 +585,7 @@ struct oplus_chg_chip {
 	struct qcom_pmic pmic_spmi;
 #endif
 #ifdef CONFIG_OPLUS_CHARGER_MTK_CHGIC
+#include "charger_ic/oplus_battery_mtk6785.h"
 	struct mtk_pmic chgic_mtk;
 #endif
 	struct power_supply	*batt_psy;
