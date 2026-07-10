@@ -46,7 +46,7 @@
 #ifdef CONFIG_OPLUS_CHARGER_MTK6853
 #include "charger_ic/oplus_battery_mtk6853R.h"
 #endif
-#ifdef CONFIG_OPLUS_CHARGER_MTK6785
+#if defined(CONFIG_OPLUS_CHARGER_MTK6785) || defined(CONFIG_MACH_MT6785)
 #include "charger_ic/oplus_battery_mtk6785.h"
 #endif
 #ifdef CONFIG_OPLUS_CHARGER_MTK6769
