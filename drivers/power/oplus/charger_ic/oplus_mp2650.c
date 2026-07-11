@@ -1855,7 +1855,7 @@ void __attribute__((weak)) oplus_get_usbtemp_volt(struct oplus_chg_chip *chip)
 bool __attribute__((weak)) oplus_usbtemp_condition(void)
 {
 	return false;
-
+}
 
 struct oplus_chg_operations  mp2650_chg_ops = {
     .dump_registers = mp2650_dump_registers,
