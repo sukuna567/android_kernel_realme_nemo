@@ -46,9 +46,10 @@
 #ifdef CONFIG_OPLUS_CHARGER_MTK6853
 #include "charger_ic/oplus_battery_mtk6853R.h"
 #endif
-#if defined(CONFIG_OPLUS_CHARGER_MTK6785) || defined(CONFIG_MACH_MT6785)
+#ifdef CONFIG_OPLUS_CHARGER_MTK6785
 #include "charger_ic/oplus_battery_mtk6785.h"
 #endif
+
 #ifdef CONFIG_OPLUS_CHARGER_MTK6769
 #include "charger_ic/oplus_battery_mtk6769.h"
 #endif
@@ -104,13 +105,13 @@
 #define OPCHG_PWROFF_HIGH_BATT_TEMP		770
 #define OPCHG_PWROFF_EMERGENCY_BATT_TEMP	850
 
-#define OPCHG_INPUT_CURRENT_LIMIT_CHARGER_MA	2000
+#define OPCHG_INPUT_CURRENT_LIMIT_CHARGER_MA	3000
 #define OPCHG_INPUT_CURRENT_LIMIT_USB_MA	500
 #define OPCHG_INPUT_CURRENT_LIMIT_CDP_MA	1500
-#define OPCHG_INPUT_CURRENT_LIMIT_LED_MA	1200
-#define OPCHG_INPUT_CURRENT_LIMIT_CAMERA_MA	1000
-#define OPCHG_INPUT_CURRENT_LIMIT_CALLING_MA	1200
-#define OPCHG_FAST_CHG_MAX_MA			2000
+#define OPCHG_INPUT_CURRENT_LIMIT_LED_MA	3000
+#define OPCHG_INPUT_CURRENT_LIMIT_CAMERA_MA	2000
+#define OPCHG_INPUT_CURRENT_LIMIT_CALLING_MA	1500
+#define OPCHG_FAST_CHG_MAX_MA			3000
 
 #define FEATURE_PRINT_CHGR_LOG
 #define FEATURE_PRINT_BAT_LOG
@@ -585,7 +586,7 @@ struct oplus_chg_chip {
 	struct qcom_pmic pmic_spmi;
 #endif
 #ifdef CONFIG_OPLUS_CHARGER_MTK_CHGIC
-#include "charger_ic/oplus_battery_mtk6785.h"
+	#include "charger_ic/oplus_battery_mtk6785.h"
 	struct mtk_pmic chgic_mtk;
 #endif
 	struct power_supply	*batt_psy;

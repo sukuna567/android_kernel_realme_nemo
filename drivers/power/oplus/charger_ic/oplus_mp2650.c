@@ -1857,7 +1857,8 @@ bool __attribute__((weak)) oplus_usbtemp_condition(void)
 	return false;
 }
 
-
+static void mp2650_usb_connect(void) { return; }
+static void mp2650_usb_disconnect(void) { return; }
 
 struct oplus_chg_operations  mp2650_chg_ops = {
     .dump_registers = mp2650_dump_registers,
@@ -1894,8 +1895,8 @@ struct oplus_chg_operations  mp2650_chg_ops = {
     .get_rtc_soc = get_rtc_spare_oplus_fg_value,
     .set_rtc_soc = set_rtc_spare_oplus_fg_value,
     .set_power_off = oplus_mt_power_off,
-    .usb_connect = mt_usb_connect,
-    .usb_disconnect = mt_usb_disconnect,
+    .usb_connect = mp2650_usb_connect,
+    .usb_disconnect = mp2650_usb_disconnect,
     .get_charger_current = mp2650_get_ibus_current,
 #else /* CONFIG_OPLUS_CHARGER_MTK */
     .get_chargerid_volt = smbchg_get_chargerid_volt,
