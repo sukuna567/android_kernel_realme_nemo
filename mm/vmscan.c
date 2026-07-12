@@ -184,7 +184,8 @@ unsigned long sysctl_clean_min_kbytes __read_mostly = CONFIG_CLEAN_MIN_KBYTES;
 /*
  * From 0 .. 100.  Higher means more swappy.
  */
-int vm_swappiness = 60;
+/* OVERRIDE: Increase swappiness to 100 to maximize ZRAM efficiency for heavy multitasking */
+int vm_swappiness = 100;
 /*
  * The total number of pages which are beyond the high watermark within all
  * zones.
