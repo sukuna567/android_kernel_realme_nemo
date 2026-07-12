@@ -1860,6 +1860,9 @@ bool __attribute__((weak)) oplus_usbtemp_condition(void)
 
 
 
+extern void mt_usb_connect(void);
+extern void mt_usb_disconnect(void);
+
 struct oplus_chg_operations  mp2650_chg_ops = {
     .dump_registers = mp2650_dump_registers,
     .kick_wdt = mp2650_kick_wdt,
