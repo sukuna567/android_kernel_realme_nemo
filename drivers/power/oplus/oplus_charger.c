@@ -807,7 +807,8 @@ int oplus_battery_get_property(struct power_supply *psy,
 			} else {
 				chip->icharging = oplus_gauge_get_batt_current();
 			}
-			val->intval = chip->icharging;
+			/* AOSP expects microAmps (uA). Multiply mA by 1000. */
+			val->intval = chip->icharging * 1000;
 			break;
 		case POWER_SUPPLY_PROP_TEMP:
 			if (oplus_vooc_get_fastchg_started() == true) {
