@@ -292,9 +292,7 @@ int Ripi_cpu_dvfs_thread(void *data)
 					p->idx_opp_ppm_base < 0)
 					p->idx_opp_ppm_base = 15;
 
-				if (p->idx_opp_ppm_limit > 15 ||
-					p->idx_opp_ppm_limit < 0)
-					p->idx_opp_ppm_limit = 0;
+				p->idx_opp_ppm_limit = 0; /* OVERRIDE: Prevent SSPM from throttling the CPU */
 
 				if (j < p->idx_opp_ppm_limit)
 					j = p->idx_opp_ppm_limit;
