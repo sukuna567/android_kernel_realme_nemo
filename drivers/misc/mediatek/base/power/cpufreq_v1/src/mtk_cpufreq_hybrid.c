@@ -293,13 +293,13 @@ int Ripi_cpu_dvfs_thread(void *data)
 					p->idx_opp_ppm_base = 15;
 
 				if (p->id == MT_CPU_DVFS_L) {
-					/* Allow big cores to reach 2.4GHz, but never throttle below 1.79GHz (idx 4) */
-					if (p->idx_opp_ppm_limit > 4)
-						p->idx_opp_ppm_limit = 4;
+					/* Allow big cores to throttle down to 1.169GHz (idx 10) to shed heat safely */
+					if (p->idx_opp_ppm_limit > 10)
+						p->idx_opp_ppm_limit = 10;
 				} else if (p->id == MT_CPU_DVFS_LL) {
-					/* Allow little cores to reach max freq, but never throttle below 1.5GHz (idx 7) */
-					if (p->idx_opp_ppm_limit > 7)
-						p->idx_opp_ppm_limit = 7;
+					/* Allow little cores to throttle down to 975MHz (idx 12) */
+					if (p->idx_opp_ppm_limit > 12)
+						p->idx_opp_ppm_limit = 12;
 				}
 
 				if (j < p->idx_opp_ppm_limit)
