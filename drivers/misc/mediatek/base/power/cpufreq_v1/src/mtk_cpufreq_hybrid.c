@@ -292,7 +292,15 @@ int Ripi_cpu_dvfs_thread(void *data)
 					p->idx_opp_ppm_base < 0)
 					p->idx_opp_ppm_base = 15;
 
-				p->idx_opp_ppm_limit = 0; /* OVERRIDE: Prevent SSPM from throttling the CPU */
+				if (p->id == MT_CPU_DVFS_L) {
+					/* Allow big cores to reach 2.4GHz, but never throttle below 1.79GHz (idx 4) */
+					if (p->idx_opp_ppm_limit > 4)
+						p->idx_opp_ppm_limit = 4;
+				} else if (p->id == MT_CPU_DVFS_LL) {
+					/* Allow little cores to reach max freq, but never throttle below 1.5GHz (idx 7) */
+					if (p->idx_opp_ppm_limit > 7)
+						p->idx_opp_ppm_limit = 7;
+				}
 
 				if (j < p->idx_opp_ppm_limit)
 					j = p->idx_opp_ppm_limit;
