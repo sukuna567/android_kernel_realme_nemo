@@ -455,7 +455,7 @@ static bool __usb_cable_connected(int ops)
 
 		/* connected according to CONNECTION_OPS */
 		if (ops != CONNECTION_OPS_CHECK)
-			connected = CONNECTION_OPS_CONN ? true : false;
+			connected = (ops == CONNECTION_OPS_CONN) ? true : false;
 
 		/* VBUS CHECK to avoid type miss-judge */
 		vbus_exist = mu3d_hal_is_vbus_exist();

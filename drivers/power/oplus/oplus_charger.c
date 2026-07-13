@@ -5314,7 +5314,9 @@ void oplus_charger_detect_check(struct oplus_chg_chip *chip)
 					chip->real_charger_type = chip->chg_ops->get_real_charger_type();
 				}
 			}
-			if(chip->chg_ops->usb_connect) {
+			if((chip->chg_ops->usb_connect)
+					&& (chip->charger_type == POWER_SUPPLY_TYPE_USB
+					|| chip->charger_type == POWER_SUPPLY_TYPE_USB_CDP)) {
 				chip->chg_ops->usb_connect();
 				charger_flag = 1;
 			}
@@ -5374,7 +5376,7 @@ void oplus_charger_detect_check(struct oplus_chg_chip *chip)
 		}
 		oplus_gauge_set_batt_full(false);
 #ifdef CONFIG_OPLUS_CHARGER_MTK
-		if (chip->chg_ops->usb_disconnect) {
+		if (chip->chg_ops->usb_disconnect && charger_flag == 1) {
 			chip->chg_ops->usb_disconnect();
 			charger_flag = 0;
 		}
