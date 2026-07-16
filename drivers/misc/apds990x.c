@@ -989,7 +989,6 @@ static ssize_t apds990x_power_state_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
 {
 	return sprintf(buf, "%d\n", !pm_runtime_suspended(dev));
-	return 0;
 }
 
 static ssize_t apds990x_power_state_store(struct device *dev,
@@ -1197,7 +1196,7 @@ static int apds990x_remove(struct i2c_client *client)
 
 	free_irq(client->irq, chip);
 	sysfs_remove_group(&chip->client->dev.kobj,
-			apds990x_attribute_group);
+			&apds990x_attribute_group[0]);
 
 	if (chip->pdata && chip->pdata->release_resources)
 		chip->pdata->release_resources();

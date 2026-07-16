@@ -244,7 +244,12 @@ static void add_uid_tasks_io_stats(struct uid_entry *uid_entry,
 		struct task_struct *task, int slot)
 {
 	struct task_entry *task_entry = find_or_register_task(uid_entry, task);
-	struct io_stats *task_io_slot = &task_entry->io[slot];
+	struct io_stats *task_io_slot;
+
+	if (!task_entry)
+		return;
+
+	task_io_slot = &task_entry->io[slot];
 
 	task_io_slot->read_bytes += task->ioac.read_bytes;
 	task_io_slot->write_bytes += compute_write_bytes(task);
