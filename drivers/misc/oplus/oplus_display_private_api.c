@@ -126,8 +126,8 @@ int oplus_mtkfb_custom_data_init(struct platform_device *pdev)
 	oplus_display_panelnum_continue_support = of_property_read_bool(pdev->dev.of_node, "oplus_display_panelnum_continue_support");
 
 	of_ret = of_property_read_u32(pdev->dev.of_node, "oplus_display_esd_try_count", &oplus_display_esd_try_count);
-	if (!of_ret)
-		dev_err(&pdev->dev, "read property oplus_display_esd_try_count failed.");
+	if (of_ret)
+		dev_err(&pdev->dev, "read property oplus_display_esd_try_count failed.\n");
 	else
 		DISPMSG("%s:oplus_display_esd_try_count=%u\n", __func__, oplus_display_esd_try_count);
 
@@ -243,11 +243,13 @@ static int interpolate(int x, int xa, int xb, int ya, int yb)
 	int bf, factor, plus;
 	int sub = 0;
 
+	if (xb == xa || yb == ya)
+		return ya;
+
 	bf = 2 * (yb - ya) * (x - xa) / (xb - xa);
 	factor = bf / 2;
 	plus = bf % 2;
-	if ((xa - xb) && (yb - ya))
-		sub = 2 * (x - xa) * (x - xb) / (yb - ya) / (xa - xb);
+	sub = 2 * (x - xa) * (x - xb) / (yb - ya) / (xa - xb);
 
 	return ya + factor + plus + sub;
 }
@@ -313,7 +315,8 @@ static ssize_t oppo_display_set_dim_alpha(struct device *dev,
                                struct device_attribute *attr,
                                const char *buf, size_t count)
 {
-	sscanf(buf, "%x", &oppo_panel_alpha);
+	if (sscanf(buf, "%x", &oppo_panel_alpha) != 1)
+		return -EINVAL;
 	return count;
 }
 
@@ -330,7 +333,8 @@ static ssize_t oppo_display_set_dc_enable(struct device *dev,
                                struct device_attribute *attr,
                                const char *buf, size_t count)
 {
-	sscanf(buf, "%x", &oppo_dc_enable);
+	if (sscanf(buf, "%x", &oppo_dc_enable) != 1)
+		return -EINVAL;
 	return count;
 }
 
@@ -344,7 +348,8 @@ static ssize_t oppo_display_set_dim_dc_alpha(struct device *dev,
                                struct device_attribute *attr,
                                const char *buf, size_t count)
 {
-	sscanf(buf, "%x", &oppo_dc_alpha);
+	if (sscanf(buf, "%x", &oppo_dc_alpha) != 1)
+		return -EINVAL;
 	return count;
 }
 
