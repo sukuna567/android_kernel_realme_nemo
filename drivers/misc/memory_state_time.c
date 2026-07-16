@@ -357,6 +357,10 @@ static int freq_buckets_init(struct device *dev)
 	pr_debug("ret freq %d\n", ret);
 
 	num_freqs = lenf;
+	if (num_freqs <= LOWEST_FREQ) {
+		pr_err("Not enough frequencies in device tree\n");
+		return -EINVAL;
+	}
 	curr_freq = freq_buckets[LOWEST_FREQ];
 
 	for (i = 0; i < num_freqs; i++) {

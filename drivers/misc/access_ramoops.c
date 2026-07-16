@@ -111,7 +111,7 @@ static int access_ramoops_open(struct inode *inode, struct file *filp)
 			goto out;
 		}
 		info->addr = ioremap(info->phys, info->size);
-		if (IS_ERR(info->addr)) {
+		if (!info->addr) {
 			dev_err(info->miscdev.this_device,
 				"unable to map region (%zx@%pa)\n",
 				info->size, &info->phys);
