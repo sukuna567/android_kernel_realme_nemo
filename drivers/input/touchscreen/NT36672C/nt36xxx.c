@@ -1150,7 +1150,8 @@ static uint8_t nvt_wdt_fw_recovery(uint8_t *point_data)
 
 	/* check pattern */
 	for (i = 1; i < 7; i++) {
-		if ((point_data[i] != 0xFD) && (point_data[i] != 0xFE)) {
+		if ((point_data[i] != 0xFD) && (point_data[i] != 0xFE) &&
+		    (point_data[i] != 0xFF)) {
 			recovery_cnt = 0;
 			break;
 		}
@@ -1197,6 +1198,30 @@ static int32_t nvt_ts_point_data_checksum(uint8_t *buf, uint8_t length)
 	return 0;
 }
 #endif				/* POINT_DATA_CHECKSUM */
+
+/*
+ * Release all touch slots to prevent ghost touches from persisting
+ * when SPI data is corrupted (e.g., from modem EMI).
+ */
+static void nvt_ts_release_all_fingers(void)
+{
+	int32_t i;
+
+	for (i = 0; i < ts->max_touch_num; i++) {
+#if MT_PROTOCOL_B
+		input_mt_slot(ts->input_dev, i);
+		input_report_abs(ts->input_dev, ABS_MT_TOUCH_MAJOR, 0);
+		input_report_abs(ts->input_dev, ABS_MT_PRESSURE, 0);
+		input_mt_report_slot_state(ts->input_dev, MT_TOOL_FINGER, false);
+#endif
+	}
+
+	input_report_key(ts->input_dev, BTN_TOUCH, 0);
+#if !MT_PROTOCOL_B
+	input_mt_sync(ts->input_dev);
+#endif
+	input_sync(ts->input_dev);
+}
 
 #define POINT_DATA_LEN 65
 /*******************************************************
@@ -1255,6 +1280,7 @@ static irqreturn_t nvt_ts_work_func(int irq, void *data)
 	if (POINT_DATA_LEN >= POINT_DATA_CHECKSUM_LEN) {
 		ret = nvt_ts_point_data_checksum(point_data, POINT_DATA_CHECKSUM_LEN);
 		if (ret) {
+			nvt_ts_release_all_fingers();
 			goto XFER_ERROR;
 		}
 	}
