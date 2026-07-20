@@ -1,32 +1,29 @@
 #!/bin/bash
-
-function compile()
-{
-rm -rf AnyKernel
-source ~/.bashrc && source ~/.profile
-TANGGAL=$(date +"%Y%m%d-%H")
-export LC_ALL=C && export USE_CCACHE=1
+set -e
+export PATH="/tmp/clang/bin:${PATH}"
+export KBUILD_BUILD_USER="Sukuna567"
+export KBUILD_BUILD_HOST="KaliLinux"
 export ARCH=arm64
-if [ ! -d "clang" ]; then
-    git clone https://github.com/kdrag0n/proton-clang.git clang --depth=1
+export SUBARCH=arm64
+export DEFCONFIG=nemo_defconfig
+
+echo "Generating defconfig..."
+mkdir -p out
+make O=out ARCH=${ARCH} ${DEFCONFIG}
+
+echo "Starting build..."
+make -j$(nproc --all) O=out \
+    ARCH=${ARCH} \
+    CC="ccache clang" \
+    LLVM=1 \
+    LLVM_IAS=1 \
+    CROSS_COMPILE=aarch64-linux-gnu- \
+    CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+    CONFIG_NO_ERROR_ON_MISMATCH=y 2>&1 | tee build.log
+
+if [ ! -f "out/arch/arm64/boot/Image.gz" ]; then
+    echo "Image.gz not found! Build failed."
+    exit 1
 fi
 
-make O=out ARCH=arm64 nemo_defconfig
-
-PATH="${PWD}/clang/bin:${PATH}" \
-make -j$(nproc --all) O=out \
-                      CC="clang" \
-                      LLVM=1 \
-                      CONFIG_NO_ERROR_ON_MISMATCH=y
-}
-
-function zipping()
-{
-git clone --depth=1 https://github.com/kardebayan/AnyKernel3.git AnyKernel
-cp out/arch/arm64/boot/Image.gz AnyKernel
-cd AnyKernel
-zip -r9 Stormbreaker-RMX2001L1-${TANGGAL}.zip *
-}
-
-compile
-zipping
+echo "Build successful! Image.gz generated."
