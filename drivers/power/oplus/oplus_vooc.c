@@ -1978,6 +1978,9 @@ void oplus_vooc_turn_off_fastchg(void)
 	oplus_vooc_switch_mode(NORMAL_CHARGER_MODE);
 	if (chip->vops->set_mcu_sleep) {
 		chip->vops->set_mcu_sleep(chip);
+		if (chip->vops->reset_mcu) {
+			chip->vops->reset_mcu(chip);
+		}
 
 		chip->allow_reading = true;
 		chip->fastchg_started = false;
