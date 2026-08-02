@@ -273,6 +273,25 @@ static int oplus_vooc_set_current_1_temp_normal_range(struct oplus_vooc_chip *ch
 
 	switch (temp_trend) {
 	case TEMP_STRATEGY_NONE:
+	case TEMP_STRATEGY_LOW:
+		if (vbat_temp_cur < chip->vooc_normal_low_temp) {
+			chip->vooc_temp_cur_range = FASTCHG_TEMP_RANGE_NORMAL_LOW;
+			ret = chip->vooc_strategy_normal_current;
+		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_low_temp0) {
+			chip->fastchg_batt_temp_status = BAT_TEMP_LOW0;
+			ret = chip->vooc_strategy_normal_current;
+		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_low_temp1) {
+			chip->fastchg_batt_temp_status = BAT_TEMP_LOW1;
+			ret = chip->vooc_strategy1_low_current0;
+		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_low_temp2) {
+			chip->fastchg_batt_temp_status = BAT_TEMP_LOW2;
+			ret = chip->vooc_strategy1_low_current1;
+		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_high_temp0) {
+			chip->fastchg_batt_temp_status = BAT_TEMP_NORMAL_HIGH;
+			ret = chip->vooc_strategy_normal_current;
+		} else {
+			chip->fastchg_batt_temp_status = BAT_TEMP_LOW_OVER;
+		}
 		break;
 	case TEMP_STRATEGY_HIGH:
 		if (vbat_temp_cur > chip->vooc_strategy1_batt_high_temp2) {
@@ -293,23 +312,6 @@ static int oplus_vooc_set_current_1_temp_normal_range(struct oplus_vooc_chip *ch
 			chip->vooc_temp_cur_range = FASTCHG_TEMP_RANGE_NORMAL_LOW;
 			oplus_vooc_reset_temp_range(chip);
 			chip->vooc_normal_low_temp += VOOC_TEMP_RANGE_THD;
-		}
-		break;
-	case TEMP_STRATEGY_LOW:
-		if (vbat_temp_cur < chip->vooc_normal_low_temp) {
-			chip->vooc_temp_cur_range = FASTCHG_TEMP_RANGE_NORMAL_LOW;
-			ret = chip->vooc_strategy_normal_current;
-		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_low_temp0) {
-			chip->fastchg_batt_temp_status = BAT_TEMP_LOW0;
-			ret = chip->vooc_strategy1_low_current0;
-		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_low_temp1) {
-			chip->fastchg_batt_temp_status = BAT_TEMP_LOW1;
-			ret = chip->vooc_strategy1_low_current1;
-		} else if (vbat_temp_cur < chip->vooc_strategy1_batt_low_temp2) {
-			chip->fastchg_batt_temp_status = BAT_TEMP_LOW2;
-			ret = chip->vooc_strategy1_low_current2;
-		} else {
-			chip->fastchg_batt_temp_status = BAT_TEMP_LOW_OVER;
 		}
 		break;
 	default:
@@ -1008,13 +1010,13 @@ static void oplus_vooc_fastchg_func(struct work_struct *work)
 				ret_info = ret_rst;
 		}
 
-		if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 85)) {
+		if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 100)) { // DISABLED: User wants no drop based on SOC
 			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
 			if(ret_rst > 0) {
 				ret_info = ret_rst;
 			}
 			pre_ret_info = (ret_info <= 3) ? 3 : ret_info;
-		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 75)) {
+		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 100)) { // DISABLED: User wants no drop based on SOC
 			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
 			if(ret_rst > 0) {
 				ret_info = ret_rst;

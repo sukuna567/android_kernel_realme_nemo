@@ -11,8 +11,11 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
   CHK     include/generated/uapi/linux/version.h
   UPD     include/config/kernel.release
 ../net/Makefile:24: CC cannot link executables. Skipping bpfilter.
--- ReSukiSU version code: 784127
--- ReSukiSU version name: v2.0-f0083260-dirty@ReSukiSU
+  Using .. as source for kernel
+  CHK     include/generated/utsrelease.h
+  UPD     include/generated/utsrelease.h
+-- ReSukiSU version code: 784128
+-- ReSukiSU version name: V3.0-f4557a15-dirty@ReSukiSU
 -- Supported Unofficial Manager: MKSU, RKSU, KOWSU, SukiSU-Ultra, ReSukiSU 
 -- KERNEL_VERSION: 4.14
 -- KERNEL_TYPE: Non-GKI
@@ -31,6 +34,7 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
 -- ReSukiSU/compat: strncpy found
 -- ReSukiSU/compat: kernel_read found
 -- ReSukiSU/compat: kernel_write found
+  CHK     scripts/mod/devicetable-offsets.h
 -- ReSukiSU/compat: path_umount found
 -- ReSukiSU/compat: selinux_inode found
 -- ReSukiSU/compat: selinux_cred found
@@ -54,23 +58,19 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
 -- ReSukiSU/compat: found hlist in security_hook_list
 -- ReSukiSU/compat: found required provide lsm name
 -- ReSukiSU/compat: found security_add_hooks
-  Using .. as source for kernel
-  CHK     include/generated/utsrelease.h
-  UPD     include/generated/utsrelease.h
-  CHK     scripts/mod/devicetable-offsets.h
   CHK     include/generated/timeconst.h
   CHK     include/generated/bounds.h
   CHK     include/generated/asm-offsets.h
   CALL    ../scripts/checksyscalls.sh
-..
-..
-..
-..
-..
-..
   CHK     include/generated/compile.h
   CC      init/version.o
   AR      init/built-in.a
+..
+..
+..
+..
+..
+..
   CC      kernel/sys.o
   CC      kernel/module.o
   CHK     kernel/config_data.h
@@ -82,13 +82,13 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
   AR      drivers/base/built-in.a
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
-../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
-../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
-../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
-../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 ../net/Makefile:24: CC cannot link executables. Skipping bpfilter.
--- ReSukiSU version code: 784127
--- ReSukiSU version name: v2.0-f0083260-dirty@ReSukiSU
+../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
+../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
+../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
+../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
+-- ReSukiSU version code: 784128
+-- ReSukiSU version name: V3.0-f4557a15-dirty@ReSukiSU
 -- Supported Unofficial Manager: MKSU, RKSU, KOWSU, SukiSU-Ultra, ReSukiSU 
 -- KERNEL_VERSION: 4.14
 -- KERNEL_TYPE: Non-GKI
