@@ -437,11 +437,11 @@ static int oplus_vooc_set_current_temp_little_cold_range(struct oplus_vooc_chip 
 
 static int oplus_vooc_init_soc_range(struct oplus_vooc_chip *chip, int soc)
 {
-	if (soc >= 0 && soc <= 50) {
+	if (soc >= 0 && soc <= 80) {
 		chip->soc_range = 0;
-	} else if (soc >= 51 && soc <= 75) {
+	} else if (soc >= 81 && soc <= 88) {
 		chip->soc_range = 1;
-	} else if (soc >= 76 && soc <= 85) {
+	} else if (soc >= 89 && soc <= 92) {
 		chip->soc_range = 2;
 	} else {
 		chip->soc_range = 3;
@@ -562,12 +562,9 @@ static int oplus_vooc_set_current_2_temp_normal_range(struct oplus_vooc_chip *ch
 		if (vbat_temp_cur > chip->vooc_strategy2_batt_up_temp3) {
 			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH1;
 			ret = chip->vooc_strategy2_high1_current;
-		} else if (vbat_temp_cur < chip->vooc_normal_low_temp) { /*T<25*/
-			chip->fastchg_batt_temp_status = BAT_TEMP_NORMAL_LOW;
-			chip->vooc_temp_cur_range = FASTCHG_TEMP_RANGE_NORMAL_LOW;
+		} else if (vbat_temp_cur < chip->vooc_strategy2_batt_up_temp1) {
+			chip->fastchg_batt_temp_status = BAT_TEMP_NORMAL_HIGH;
 			ret = chip->vooc_strategy_normal_current;
-			oplus_vooc_reset_temp_range(chip);
-			chip->vooc_normal_low_temp += VOOC_TEMP_RANGE_THD;
 		} else {
 			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH0;
 			ret = chip->vooc_strategy2_high0_current;
@@ -577,12 +574,9 @@ static int oplus_vooc_set_current_2_temp_normal_range(struct oplus_vooc_chip *ch
 		if (vbat_temp_cur > chip->vooc_strategy2_batt_up_temp5) {
 			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH2;
 			ret = chip->vooc_strategy2_high2_current;
-		} else if (vbat_temp_cur < chip->vooc_normal_low_temp) { /*T<25*/
-			chip->fastchg_batt_temp_status = BAT_TEMP_NORMAL_LOW;
-			chip->vooc_temp_cur_range = FASTCHG_TEMP_RANGE_NORMAL_LOW;
-			ret = chip->vooc_strategy_normal_current;
-			oplus_vooc_reset_temp_range(chip);
-			chip->vooc_normal_low_temp += VOOC_TEMP_RANGE_THD;
+		} else if (vbat_temp_cur < chip->vooc_strategy2_batt_up_temp3) {
+			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH0;
+			ret = chip->vooc_strategy2_high0_current;
 		} else {
 			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH1;
 			ret = chip->vooc_strategy2_high1_current;
@@ -592,7 +586,7 @@ static int oplus_vooc_set_current_2_temp_normal_range(struct oplus_vooc_chip *ch
 		if (vbat_temp_cur > chip->vooc_strategy2_batt_up_temp6) {
 			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH3;
 			ret = chip->vooc_strategy2_high3_current;
-		} else if (vbat_temp_cur < chip->vooc_strategy2_batt_up_down_temp2) {
+		} else if (vbat_temp_cur < chip->vooc_strategy2_batt_up_temp5) {
 			chip->fastchg_batt_temp_status = BAT_TEMP_HIGH1;
 			ret = chip->vooc_strategy2_high1_current;
 		} else {
@@ -1010,18 +1004,18 @@ static void oplus_vooc_fastchg_func(struct work_struct *work)
 				ret_info = ret_rst;
 		}
 
-		if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 100)) { // DISABLED: User wants no drop based on SOC
+		if ((chip->vooc_multistep_adjust_current_support == true) && (soc >= 80 && soc < 88)) {
+			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
+			if(ret_rst > 0) {
+				ret_info = ret_rst;
+			}
+			pre_ret_info = (ret_info <= 4) ? 4 : ret_info;
+		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc >= 88)) {
 			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
 			if(ret_rst > 0) {
 				ret_info = ret_rst;
 			}
 			pre_ret_info = (ret_info <= 3) ? 3 : ret_info;
-		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 100)) { // DISABLED: User wants no drop based on SOC
-			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
-			if(ret_rst > 0) {
-				ret_info = ret_rst;
-			}
-			pre_ret_info = (ret_info <= 5) ? 5 : ret_info;
 		} else {
 			pre_ret_info = ret_info;
 		}
