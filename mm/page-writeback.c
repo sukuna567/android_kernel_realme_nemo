@@ -86,10 +86,8 @@ unsigned long dirty_background_bytes;
  */
 int vm_highmem_is_dirtyable;
 
-/*
- * The generator of dirty data starts writeback at this percentage
- */
-int vm_dirty_ratio = 20;
+/* LuwengSense AI: Start writeback early at 10% to prevent dirty memory buildup */
+int vm_dirty_ratio = 10;
 
 /*
  * vm_dirty_bytes starts at 0 (disabled) so that it is a function of

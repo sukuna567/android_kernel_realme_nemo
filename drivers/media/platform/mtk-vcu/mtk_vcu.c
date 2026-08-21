@@ -471,8 +471,11 @@ int vcu_ipi_send(struct platform_device *pdev,
 	 * The dispatched ipi msg is being processed by app service.
 	 * Usually, it takes dozens of microseconds in average.
 	 */
-	while (atomic_read(&vcu->ipi_done[i]) == 0)
+	while (atomic_read(&vcu->ipi_done[i]) == 0) {
+		if (vcu_ptr->abort)
+			break;
 		cond_resched();
+	}
 
 end:
 	return ret;

@@ -236,7 +236,7 @@ static struct vb2_buffer *get_free_buffer(struct mtk_vcodec_ctx *ctx)
 	if (dstbuf->used) {
 		if ((dstbuf->queued_in_vb2) &&
 			(dstbuf->queued_in_v4l2) &&
-			(free_frame_buffer->status == FB_ST_FREE)) {
+			(free_frame_buffer->status & FB_ST_FREE)) {
 			/*
 			 * After decode sps/pps or non-display buffer, we don't
 			 * need to return capture buffer to user space, but
@@ -266,6 +266,9 @@ static struct vb2_buffer *get_free_buffer(struct mtk_vcodec_ctx *ctx)
 				"[%d]status=%x queue id=%d to rdy_queue",
 				ctx->id, free_frame_buffer->status,
 				dstbuf->vb.vb2_buf.index);
+			v4l2_m2m_buf_queue_check(ctx->m2m_ctx, &dstbuf->vb);
+			dstbuf->queued_in_vb2 = true;
+		} else if (dstbuf->queued_in_v4l2 == true) {
 			v4l2_m2m_buf_queue_check(ctx->m2m_ctx, &dstbuf->vb);
 			dstbuf->queued_in_vb2 = true;
 		} else {
@@ -725,6 +728,12 @@ static void mtk_vdec_worker(struct work_struct *work)
 			ret, src_chg);
 		src_buf = v4l2_m2m_src_buf_remove(ctx->m2m_ctx);
 		clean_free_bs_buffer(ctx, &src_buf_info->bs_buffer);
+		if (!ctx->input_driven && dst_buf_info && dst_buf_info->used) {
+			mutex_lock(&ctx->buf_lock);
+			dst_buf_info->used = false;
+			mutex_unlock(&ctx->buf_lock);
+			v4l2_m2m_buf_done(&dst_buf_info->vb, VB2_BUF_STATE_ERROR);
+		}
 		if (ret == -EIO) {
 			/* ipi timeout / VPUD crashed ctx abort */
 			ctx->lock_abort = true;
@@ -2360,11 +2369,20 @@ static void vb2ops_vdec_buf_finish(struct vb2_buffer *vb)
 			struct dma_buf_attachment *buf_att;
 			struct sg_table *sgt;
 
+			if (!vb->planes[plane].dbuf)
+				continue;
+
 			mtk_v4l2_debug(4, "[%d] Cache sync+", ctx->id);
 
 			buf_att = dma_buf_attach(vb->planes[plane].dbuf,
 				&ctx->dev->plat_dev->dev);
+			if (IS_ERR(buf_att))
+				continue;
 			sgt = dma_buf_map_attachment(buf_att, DMA_FROM_DEVICE);
+			if (IS_ERR(sgt)) {
+				dma_buf_detach(vb->planes[plane].dbuf, buf_att);
+				continue;
+			}
 			dma_sync_sg_for_cpu(&ctx->dev->plat_dev->dev, sgt->sgl,
 				sgt->orig_nents, DMA_FROM_DEVICE);
 			dma_buf_unmap_attachment(buf_att, sgt, DMA_FROM_DEVICE);

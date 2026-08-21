@@ -1186,12 +1186,14 @@ static void ppm_limit_callback(struct ppm_client_req req)
 		if (ppm->cpu_limit[i].has_advise_freq) {
 			p->idx_opp_ppm_base =
 			ppm->cpu_limit[i].advise_cpufreq_idx;
-			p->idx_opp_ppm_limit = 0; /* IGNORE PPM THROTTLE */
+			p->idx_opp_ppm_limit =
+			ppm->cpu_limit[i].advise_cpufreq_idx;
 		} else {
 			p->idx_opp_ppm_base =
 			ppm->cpu_limit[i].min_cpufreq_idx;
 			/* ppm update base */
-			p->idx_opp_ppm_limit = 0; /* IGNORE PPM THROTTLE */
+			p->idx_opp_ppm_limit =
+			ppm->cpu_limit[i].max_cpufreq_idx;
 			/* ppm update limit */
 		}
 	}

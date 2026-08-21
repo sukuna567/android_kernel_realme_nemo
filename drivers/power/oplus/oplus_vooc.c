@@ -437,11 +437,11 @@ static int oplus_vooc_set_current_temp_little_cold_range(struct oplus_vooc_chip 
 
 static int oplus_vooc_init_soc_range(struct oplus_vooc_chip *chip, int soc)
 {
-	if (soc >= 0 && soc <= 80) {
+	if (soc >= 0 && soc <= 50) {
 		chip->soc_range = 0;
-	} else if (soc >= 81 && soc <= 88) {
+	} else if (soc >= 51 && soc <= 75) {
 		chip->soc_range = 1;
-	} else if (soc >= 89 && soc <= 92) {
+	} else if (soc >= 76 && soc <= 85) {
 		chip->soc_range = 2;
 	} else {
 		chip->soc_range = 3;
@@ -1004,18 +1004,18 @@ static void oplus_vooc_fastchg_func(struct work_struct *work)
 				ret_info = ret_rst;
 		}
 
-		if ((chip->vooc_multistep_adjust_current_support == true) && (soc >= 80 && soc < 88)) {
-			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
-			if(ret_rst > 0) {
-				ret_info = ret_rst;
-			}
-			pre_ret_info = (ret_info <= 4) ? 4 : ret_info;
-		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc >= 88)) {
+		if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 50 && soc <= 75)) {
 			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
 			if(ret_rst > 0) {
 				ret_info = ret_rst;
 			}
 			pre_ret_info = (ret_info <= 3) ? 3 : ret_info;
+		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 75)) {
+			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
+			if(ret_rst > 0) {
+				ret_info = ret_rst;
+			}
+			pre_ret_info = (ret_info <= 5) ? 5 : ret_info;
 		} else {
 			pre_ret_info = ret_info;
 		}
@@ -1974,9 +1974,6 @@ void oplus_vooc_turn_off_fastchg(void)
 	oplus_vooc_switch_mode(NORMAL_CHARGER_MODE);
 	if (chip->vops->set_mcu_sleep) {
 		chip->vops->set_mcu_sleep(chip);
-		if (chip->vops->reset_mcu) {
-			chip->vops->reset_mcu(chip);
-		}
 
 		chip->allow_reading = true;
 		chip->fastchg_started = false;

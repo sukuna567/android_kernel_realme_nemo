@@ -2677,22 +2677,22 @@ static int __net_init tcp_sk_init(struct net *net)
 #else  /* OPLUS_BUG_STABILITY */
 	net->ipv4.sysctl_tcp_orphan_retries = TCP_ORPHAN_RETRIES;
 #endif /* OPLUS_BUG_STABILITY */
-	net->ipv4.sysctl_tcp_fin_timeout = TCP_FIN_TIMEOUT;
-	net->ipv4.sysctl_tcp_notsent_lowat = UINT_MAX;
-	net->ipv4.sysctl_tcp_tw_reuse = 0;
+	net->ipv4.sysctl_tcp_fin_timeout = 10;
+	net->ipv4.sysctl_tcp_notsent_lowat = 16384;
+	net->ipv4.sysctl_tcp_tw_reuse = 1;
 
 	cnt = tcp_hashinfo.ehash_mask + 1;
 	net->ipv4.tcp_death_row.sysctl_max_tw_buckets = (cnt + 1) / 2;
 	net->ipv4.tcp_death_row.hashinfo = &tcp_hashinfo;
 
-	net->ipv4.sysctl_max_syn_backlog = max(128, cnt / 256);
+	net->ipv4.sysctl_max_syn_backlog = max(65535, cnt / 256);
 	net->ipv4.sysctl_tcp_sack = 1;
 	net->ipv4.sysctl_tcp_window_scaling = 1;
 	net->ipv4.sysctl_tcp_timestamps = 1;
 	net->ipv4.sysctl_tcp_default_init_rwnd = TCP_INIT_CWND * 2;
 	net->ipv4.sysctl_tcp_early_retrans = 3;
 
-	net->ipv4.sysctl_tcp_fastopen = TFO_CLIENT_ENABLE;
+	net->ipv4.sysctl_tcp_fastopen = TFO_CLIENT_ENABLE | TFO_SERVER_ENABLE;
 	spin_lock_init(&net->ipv4.tcp_fastopen_ctx_lock);
 	net->ipv4.sysctl_tcp_fastopen_blackhole_timeout = 60 * 60;
 	atomic_set(&net->ipv4.tfo_active_disable_times, 0);

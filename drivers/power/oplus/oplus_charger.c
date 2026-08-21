@@ -2862,13 +2862,13 @@ int oplus_chg_parse_charger_dt(struct oplus_chg_chip *chip)
 	}
 	rc = of_property_read_u32(node, "qcom,vbatt_power_off",
 			&chip->vbatt_power_off);
-	if (rc < 0 || chip->vbatt_power_off > 3100) {
-		chip->vbatt_power_off = 3100;
+	if (rc < 0) {
+		chip->vbatt_power_off = 3300;
 	}
 	rc = of_property_read_u32(node, "qcom,vbatt_soc_1",
 			&chip->vbatt_soc_1);
-	if (rc < 0 || chip->vbatt_soc_1 > 3200) {
-		chip->vbatt_soc_1 = 3200;
+	if (rc < 0) {
+		chip->vbatt_soc_1 = 3410;
 	}
 	rc = of_property_read_u32(node, "qcom,normal_vterm_hw_inc",
 			&chip->limits.normal_vterm_hw_inc);

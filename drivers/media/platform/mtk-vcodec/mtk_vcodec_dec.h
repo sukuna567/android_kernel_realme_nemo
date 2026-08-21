@@ -22,8 +22,8 @@
 #define VCODEC_CAPABILITY_4K_DISABLED   0x10
 #define VCODEC_DEC_4K_CODED_WIDTH       4096U
 #define VCODEC_DEC_4K_CODED_HEIGHT      2304U
-#define MTK_VDEC_MAX_W  2048U
-#define MTK_VDEC_MAX_H  1088U
+#define MTK_VDEC_MAX_W  4096U
+#define MTK_VDEC_MAX_H  2304U
 
 /**
  * struct vdec_fb  - decoder frame buffer

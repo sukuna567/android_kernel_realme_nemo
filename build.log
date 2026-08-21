@@ -9,13 +9,24 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
   CHK     include/config/kernel.release
   GEN     ./Makefile
   CHK     include/generated/uapi/linux/version.h
-  UPD     include/config/kernel.release
 ../net/Makefile:24: CC cannot link executables. Skipping bpfilter.
+  CHK     scripts/mod/devicetable-offsets.h
   Using .. as source for kernel
   CHK     include/generated/utsrelease.h
-  UPD     include/generated/utsrelease.h
--- ReSukiSU version code: 784128
--- ReSukiSU version name: V3.0-f4557a15-dirty@ReSukiSU
+..
+..
+  CHK     include/generated/timeconst.h
+  CHK     include/generated/bounds.h
+..
+  CHK     include/generated/asm-offsets.h
+  CALL    ../scripts/checksyscalls.sh
+..
+..
+..
+  CHK     include/generated/compile.h
+  CHK     kernel/config_data.h
+-- ReSukiSU version code: 784130
+-- ReSukiSU version name: V3.0-82f20ba8-dirty@ReSukiSU
 -- Supported Unofficial Manager: MKSU, RKSU, KOWSU, SukiSU-Ultra, ReSukiSU 
 -- KERNEL_VERSION: 4.14
 -- KERNEL_TYPE: Non-GKI
@@ -34,7 +45,6 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
 -- ReSukiSU/compat: strncpy found
 -- ReSukiSU/compat: kernel_read found
 -- ReSukiSU/compat: kernel_write found
-  CHK     scripts/mod/devicetable-offsets.h
 -- ReSukiSU/compat: path_umount found
 -- ReSukiSU/compat: selinux_inode found
 -- ReSukiSU/compat: selinux_cred found
@@ -58,37 +68,31 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
 -- ReSukiSU/compat: found hlist in security_hook_list
 -- ReSukiSU/compat: found required provide lsm name
 -- ReSukiSU/compat: found security_add_hooks
-  CHK     include/generated/timeconst.h
-  CHK     include/generated/bounds.h
-  CHK     include/generated/asm-offsets.h
-  CALL    ../scripts/checksyscalls.sh
-  CHK     include/generated/compile.h
-  CC      init/version.o
-  AR      init/built-in.a
-..
-..
-..
-..
-..
-..
-  CC      kernel/sys.o
-  CC      kernel/module.o
-  CHK     kernel/config_data.h
-  AR      kernel/built-in.a
+../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
+../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 ../drivers/tee/Makefile:4: "tee config----- CONFIG_TEE: Y"
 ../drivers/tee/Makefile:5: "tee config----- CONFIG_TRUSTONIC_TEE_SUPPORT: Y"
 ../drivers/tee/Makefile:6: "tee config----- CONFIG_TRUSTONIC_TEE_VERSION: "500""
-  CC      drivers/base/firmware_class.o
-  AR      drivers/base/built-in.a
-../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
-../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 ../net/Makefile:24: CC cannot link executables. Skipping bpfilter.
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
--- ReSukiSU version code: 784128
--- ReSukiSU version name: V3.0-f4557a15-dirty@ReSukiSU
+../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
+../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
+..
+..
+..
+..
+..
+..
+../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
+../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
+../drivers/tee/Makefile:4: "tee config----- CONFIG_TEE: y"
+../drivers/tee/Makefile:5: "tee config----- CONFIG_TRUSTONIC_TEE_SUPPORT: y"
+../drivers/tee/Makefile:6: "tee config----- CONFIG_TRUSTONIC_TEE_VERSION: "500""
+-- ReSukiSU version code: 784130
+-- ReSukiSU version name: V3.0-82f20ba8-dirty@ReSukiSU
 -- Supported Unofficial Manager: MKSU, RKSU, KOWSU, SukiSU-Ultra, ReSukiSU 
 -- KERNEL_VERSION: 4.14
 -- KERNEL_TYPE: Non-GKI
@@ -102,6 +106,8 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
 -- ReSukiSU/susfs_inline: ksu_handle_stat found
 -- ReSukiSU/susfs_inline: ksu_handle_sys_reboot found
 -- ReSukiSU/susfs_inline: ksu_handle_input_handle_event found
+../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
+../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 
 -- SUSFS_VERSION: v2.2.0
 -- ReSukiSU/compat: current_sid found
@@ -132,68 +138,28 @@ scripts/kconfig/conf  --silentoldconfig Kconfig
 -- ReSukiSU/compat: found hlist in security_hook_list
 -- ReSukiSU/compat: found required provide lsm name
 -- ReSukiSU/compat: found security_add_hooks
+  CC      drivers/misc/mediatek/gpu/ged/src/ged_monitor_3D_fence.o
   CC      drivers/kernelsu/core/init.o
-  CC      drivers/kernelsu/policy/allowlist.o
-  CC      drivers/kernelsu/policy/app_profile.o
-  CC      drivers/kernelsu/policy/feature.o
-  CC      drivers/kernelsu/feature/sucompat.o
-  CC      drivers/kernelsu/feature/kernel_umount.o
-  CC      drivers/kernelsu/feature/sulog.o
-  CC      drivers/kernelsu/feature/adb_root.o
-  CC      drivers/kernelsu/feature/selinux_hide.o
-  CC      drivers/kernelsu/hook/setuid_hook.o
-  CC      drivers/kernelsu/feature/dynamic_manager.o
-  CC      drivers/kernelsu/manager/apk_sign.o
-  CC      drivers/kernelsu/manager/throne_tracker.o
-  CC      drivers/kernelsu/manager/manager.o
-  CC      drivers/kernelsu/compat/kernel_compat.o
-  CC      drivers/kernelsu/infra/su_mount_ns.o
-  CC      drivers/kernelsu/infra/seccomp_cache.o
-drivers/kernelsu/infra/.tmp_seccomp_cache.o: no symbols
-  CC      drivers/kernelsu/infra/file_wrapper.o
-  CC      drivers/kernelsu/infra/event_queue.o
-  CC      drivers/kernelsu/runtime/boot_event.o
-  CC      drivers/kernelsu/runtime/ksud_integration.o
-  CC      drivers/kernelsu/selinux/selinux.o
-  CC      drivers/kernelsu/selinux/sepolicy.o
-  CC      drivers/kernelsu/selinux/rules.o
-  CC      drivers/kernelsu/sulog/event.o
-  CC      drivers/kernelsu/sulog/fd.o
-  CC      drivers/kernelsu/supercall/dispatch.o
-  CC      drivers/kernelsu/supercall/perm.o
-  CC      drivers/kernelsu/supercall/supercall.o
-  CC      drivers/kernelsu/compat/apatch_conflict.o
-  CC      drivers/kernelsu/hook/arm64/patch_memory.o
-  CC      drivers/kernelsu/infra/symbol_resolver.o
-  CC      drivers/kernelsu/hook/lsm_hooks.o
+  CC      drivers/misc/mediatek/gpu/ged/src/ged_kpi.o
   AR      drivers/kernelsu/kernelsu.o
   AR      drivers/kernelsu/built-in.a
+  AR      drivers/misc/mediatek/gpu/ged/ged.o
+  AR      drivers/misc/mediatek/gpu/ged/built-in.a
+  AR      drivers/misc/mediatek/gpu/built-in.a
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
-..
-..
-..
-..
-..
-..
-../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
-../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
-  CC      drivers/power/oplus/oplus_vooc.o
-  AR      drivers/power/oplus/built-in.a
-  AR      drivers/power/built-in.a
-../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
-../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
-../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
-../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
-../drivers/tee/Makefile:4: "tee config----- CONFIG_TEE: y"
-../drivers/tee/Makefile:5: "tee config----- CONFIG_TRUSTONIC_TEE_SUPPORT: y"
-../drivers/tee/Makefile:6: "tee config----- CONFIG_TRUSTONIC_TEE_VERSION: "500""
+  CC      drivers/misc/mediatek/performance/fpsgo_v3/fbt/platform/mt6785/fbt_cpu_platform.o
+  AR      drivers/misc/mediatek/performance/fpsgo_v3/fbt/built-in.a
+  AR      drivers/misc/mediatek/performance/fpsgo_v3/built-in.a
+  AR      drivers/misc/mediatek/performance/built-in.a
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
 ../drivers/misc/mediatek/gud/Makefile.include:2: "CONFIG_MTK_PLATFORM: "mt6785""
 ../drivers/misc/mediatek/gud/Makefile.include:3: "CONFIG_TRUSTONIC_TEE_VERSION: "500""
+  AR      drivers/misc/mediatek/built-in.a
+  AR      drivers/misc/built-in.a
   AR      drivers/built-in.a
   GEN     .version
   CHK     include/generated/compile.h

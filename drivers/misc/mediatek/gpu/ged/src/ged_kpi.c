@@ -296,12 +296,12 @@ static unsigned long long g_CRemTimeAccu; /*g_cpu_remained_time_accum*/
 static unsigned long long g_gpu_freq_accum;
 static unsigned int g_frame_count;
 
-static int gx_game_mode;
-static int gx_boost_on;
+static int gx_game_mode = 1;
+static int gx_boost_on = 1;
 #ifdef GED_KPI_CPU_BOOST
-static int gx_force_cpu_boost;
+static int gx_force_cpu_boost = 1;
 static int gx_top_app_pid;
-static int enable_game_self_frc_detect;
+static int enable_game_self_frc_detect = 1;
 #endif /* GED_KPI_CPU_BOOST */
 static unsigned int gx_fps;
 static unsigned int gx_cpu_time_avg;
@@ -317,9 +317,9 @@ static int boost_accum_cpu;
 static long target_t_cpu_remained = 16000000;
 /* static long target_t_cpu_remained_min = 8300000; */
 /* default 0.5 vsync period */
-static int cpu_boost_policy;
-static int boost_extra;
-static int boost_amp;
+static int cpu_boost_policy = 1;
+static int boost_extra = 1;
+static int boost_amp = 1;
 static int deboost_reduce;
 static int boost_upper_bound = 100;
 static void (*ged_kpi_cpu_boost_policy_fp)(struct GED_KPI_HEAD *psHead,
