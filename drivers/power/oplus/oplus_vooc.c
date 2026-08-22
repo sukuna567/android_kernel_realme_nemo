@@ -1004,18 +1004,18 @@ static void oplus_vooc_fastchg_func(struct work_struct *work)
 				ret_info = ret_rst;
 		}
 
-		if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 50 && soc <= 75)) {
+		if ((chip->vooc_multistep_adjust_current_support == true) && (soc >= 80 && soc < 88)) {
+			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
+			if(ret_rst > 0) {
+				ret_info = ret_rst;
+			}
+			pre_ret_info = (ret_info <= 4) ? 4 : ret_info;
+		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc >= 88)) {
 			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
 			if(ret_rst > 0) {
 				ret_info = ret_rst;
 			}
 			pre_ret_info = (ret_info <= 3) ? 3 : ret_info;
-		} else if ((chip->vooc_multistep_adjust_current_support == true) && (soc > 75)) {
-			ret_rst = oplus_vooc_get_smaller_battemp_cooldown(pre_ret_info , ret_info);
-			if(ret_rst > 0) {
-				ret_info = ret_rst;
-			}
-			pre_ret_info = (ret_info <= 5) ? 5 : ret_info;
 		} else {
 			pre_ret_info = ret_info;
 		}
