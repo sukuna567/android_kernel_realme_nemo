@@ -236,7 +236,7 @@ static struct vb2_buffer *get_free_buffer(struct mtk_vcodec_ctx *ctx)
 	if (dstbuf->used) {
 		if ((dstbuf->queued_in_vb2) &&
 			(dstbuf->queued_in_v4l2) &&
-			(free_frame_buffer->status & FB_ST_FREE)) {
+			(free_frame_buffer->status == FB_ST_FREE)) {
 			/*
 			 * After decode sps/pps or non-display buffer, we don't
 			 * need to return capture buffer to user space, but
@@ -266,9 +266,6 @@ static struct vb2_buffer *get_free_buffer(struct mtk_vcodec_ctx *ctx)
 				"[%d]status=%x queue id=%d to rdy_queue",
 				ctx->id, free_frame_buffer->status,
 				dstbuf->vb.vb2_buf.index);
-			v4l2_m2m_buf_queue_check(ctx->m2m_ctx, &dstbuf->vb);
-			dstbuf->queued_in_vb2 = true;
-		} else if (dstbuf->queued_in_v4l2 == true) {
 			v4l2_m2m_buf_queue_check(ctx->m2m_ctx, &dstbuf->vb);
 			dstbuf->queued_in_vb2 = true;
 		} else {
@@ -2364,7 +2361,7 @@ static void vb2ops_vdec_buf_finish(struct vb2_buffer *vb)
 	if (vb->vb2_queue->memory == VB2_MEMORY_DMABUF &&
 		!(mtkbuf->flags & NO_CAHCE_INVALIDATE) &&
 		!(ctx->dec_params.svp_mode)) {
-		for (plane = 0; plane < buf->frame_buffer.num_planes; plane++) {
+		for (plane = 0; plane < vb->num_planes; plane++) {
 			struct vdec_fb dst_mem;
 			struct dma_buf_attachment *buf_att;
 			struct sg_table *sgt;

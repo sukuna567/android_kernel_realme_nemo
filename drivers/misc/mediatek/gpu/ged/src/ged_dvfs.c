@@ -49,7 +49,7 @@
 #endif
 
 #define MTK_DEFER_DVFS_WORK_MS          10000
-#define MTK_DVFS_SWITCH_INTERVAL_MS     50
+#define MTK_DVFS_SWITCH_INTERVAL_MS     16
 
 /* Definition of GED_DVFS_SKIP_ROUNDS is to skip DVFS when boost raised
  *  the value stands for counting down rounds of DVFS period

@@ -156,12 +156,12 @@ int fbt_get_L_min_ceiling(void)
 
 int fbt_get_default_boost_ta(void)
 {
-	return 1;
+	return 0;
 }
 
 int fbt_get_default_adj_loading(void)
 {
-	return 1;
+	return 0;
 }
 
 int fbt_get_cluster_limit(int *cluster, int *freq)
