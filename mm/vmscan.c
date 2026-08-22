@@ -195,8 +195,8 @@ unsigned long sysctl_clean_min_kbytes __read_mostly = CONFIG_CLEAN_MIN_KBYTES;
 /*
  * From 0 .. 100.  Higher means more swappy.
  */
-/* LuwengSense AI: Balanced swappiness to reduce swap thrashing and optimize multitasking */
-int vm_swappiness = 40;
+/* Optimize for ZRAM: protect active file caches (.apk, .dex, .so) in RAM */
+int vm_swappiness = 100;
 /*
  * The total number of pages which are beyond the high watermark within all
  * zones.
@@ -4020,7 +4020,7 @@ static bool age_lruvec(struct lruvec *lruvec, struct scan_control *sc,
 }
 
 /* to protect the working set of the last N jiffies */
-static unsigned long lru_gen_min_ttl __read_mostly = HZ;
+static unsigned long lru_gen_min_ttl __read_mostly = 0;
 
 static void lru_gen_age_node(struct pglist_data *pgdat, struct scan_control *sc)
 {
